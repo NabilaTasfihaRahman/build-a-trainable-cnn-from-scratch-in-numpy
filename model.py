@@ -51,8 +51,20 @@ def stable_softmax(logits):
     output=logit_shifted/row_sum(logit_shifted)
     return output
 
-# Step 6 - one_hot (not yet solved)
-# TODO: implement
+# Step 6 - one_hot
+import numpy as np
+def one_hot(labels, num_classes):
+    # TODO: convert integer labels into a (N, num_classes) one-hot float matrix
+    # newlabels,idx=np.unique(labels,return_index=True)
+    # blabels=[labels[i] for i in sorted(idx)]
+    new_label=np.zeros((labels.shape[0],num_classes))
+    # if labels.shape[0]==num_classes:
+    for i in range(new_label.shape[0]):
+    
+        new_label[i,labels[i]]=1.0
+    
+
+    return new_label
 
 # Step 7 - gather_true_class_probs (not yet solved)
 # TODO: implement
