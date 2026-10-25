@@ -150,7 +150,7 @@ def im2col(images, kernel_h, kernel_w, stride, padding):
                 start_w:start_w+kernel_w]
                 output[bleh]=patch.reshape(-1)
                 bleh=bleh+1
-    return output.astype(int)
+    return output.astype(images.dtype)
 
 # Step 16 - col2im
 import numpy as np
@@ -188,7 +188,7 @@ def conv2d_forward(x, weights, bias, stride, padding):
     N,_,H,W=x.shape
     hnew=output_spatial_size(H,kh,stride,padding)
     wnew=output_spatial_size(W,kw,stride,padding)
-    xcols=im2col(x,kh,kw,stride,padding)
+    xcols=im2col(x,kh,kw,stride,padding).astype(x.dtype)
     dictionary={'x_shape':x.shape,
     'weights':weights,
     'bias':bias,
