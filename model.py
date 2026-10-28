@@ -204,8 +204,22 @@ def conv2d_forward(x, weights, bias, stride, padding):
     return result.reshape(N, hnew, wnew, Cout).transpose(0, 3, 1, 2),dictionary
     # return dictionary
 
-# Step 18 - conv2d_grad_input (not yet solved)
-# TODO: implement
+# Step 18 - conv2d_grad_input
+import numpy as np
+def conv2d_grad_input(d_out, cache):
+    # TODO: backprop d_out through the conv input using col2im
+    inputshape=cache['x_shape']
+    stride=cache['stride']
+    padding=cache['padding']
+    kernel_h=cache['kernel_h']
+    kernel_w=cache['kernel_w']
+    d_out=np.transpose(d_out,(0,2,3,1))
+    weights=cache["weights"]
+
+    weights_2d=np.reshape(weights,(weights.shape[0],-1))
+    dout_2d=np.reshape(d_out,(-1,d_out.shape[-1]))
+    grad_input=np.matmul(dout_2d,weights_2d)
+    return col2im(grad_input,inputshape,kernel_h,kernel_w,stride,padding)
 
 # Step 19 - conv2d_grad_weights (not yet solved)
 # TODO: implement
