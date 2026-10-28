@@ -221,8 +221,27 @@ def conv2d_grad_input(d_out, cache):
     grad_input=np.matmul(dout_2d,weights_2d)
     return col2im(grad_input,inputshape,kernel_h,kernel_w,stride,padding)
 
-# Step 19 - conv2d_grad_weights (not yet solved)
-# TODO: implement
+# Step 19 - conv2d_grad_weights
+import numpy as np
+def conv2d_grad_weights(d_out, cache):
+    # TODO: return dL/dW shaped (C_out, C_in, kH, kW) from d_out and the im2col cache.
+    
+    import numpy as np
+
+    # TODO: backprop d_out through the conv input using col2im
+    
+    stride=cache['stride']
+    padding=cache['padding']
+    kernel_h=cache['kernel_h']
+    kernel_w=cache['kernel_w']
+    x=cache['cols']
+    d_out=np.transpose(d_out,(0,2,3,1))
+    weights=cache["weights"]
+    weightshape=weights.shape
+    x_2d=np.reshape(x,(x.shape[0],-1))
+    dout_2d=np.reshape(d_out,(-1,d_out.shape[-1]))
+    grad_input=np.matmul(dout_2d,x)
+    return col2im(grad_input,weightsshape,kernel_h,kernel_w,stride,padding)
 
 # Step 20 - conv2d_grad_bias (not yet solved)
 # TODO: implement
