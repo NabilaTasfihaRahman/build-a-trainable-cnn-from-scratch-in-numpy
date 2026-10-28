@@ -243,8 +243,12 @@ def conv2d_grad_weights(d_out, cache):
     grad_input=np.matmul(np.transpose(dout_2d),x)
     return np.reshape(grad_input,weightshape)
 
-# Step 20 - conv2d_grad_bias (not yet solved)
-# TODO: implement
+# Step 20 - conv2d_grad_bias
+import numpy as np
+def conv2d_grad_bias(d_out):
+    # TODO: return a length C_out gradient by reducing d_out over batch and spatial axes
+    d_out=np.transpose(d_out,(0,2,3,1))
+    return np.sum(d_out,axis=(0,1,2))
 
 # Step 21 - conv2d_backward (not yet solved)
 # TODO: implement
