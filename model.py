@@ -194,7 +194,7 @@ def conv2d_forward(x, weights, bias, stride, padding):
     'bias':bias,
     'stride':stride,
     'padding':padding,
-    'cols': x.shape[1],
+    'cols': xcols,
     'kernel_h':kh,
     'kernel_w':kw
     }
