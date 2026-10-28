@@ -230,8 +230,8 @@ def conv2d_grad_weights(d_out, cache):
 
     # TODO: backprop d_out through the conv input using col2im
     
-    stride=cache['stride']
-    padding=cache['padding']
+    # stride=cache['stride']
+    # padding=cache['padding']
     kernel_h=cache['kernel_h']
     kernel_w=cache['kernel_w']
     x=cache['cols']
@@ -240,8 +240,8 @@ def conv2d_grad_weights(d_out, cache):
     weightshape=weights.shape
     x_2d=np.reshape(x,(x.shape[0],-1))
     dout_2d=np.reshape(d_out,(-1,d_out.shape[-1]))
-    grad_input=np.matmul(dout_2d,x)
-    return col2im(grad_input,weightsshape,kernel_h,kernel_w,stride,padding)
+    grad_input=np.matmul(np.transpose(dout_2d),x)
+    return np.reshape(grad_input,weightshape)
 
 # Step 20 - conv2d_grad_bias (not yet solved)
 # TODO: implement
