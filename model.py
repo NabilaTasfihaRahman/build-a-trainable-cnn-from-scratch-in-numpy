@@ -267,8 +267,13 @@ def conv2d_backward(d_out, cache):
 # Step 24 - maxpool2d_backward (not yet solved)
 # TODO: implement
 
-# Step 25 - relu_forward (not yet solved)
-# TODO: implement
+# Step 25 - relu_forward
+import numpy as np
+def relu_forward(x):
+    # TODO: Compute the elementwise ReLU and cache the input for backprop.
+    cache={"x":x}
+    out=np.maximum(x,0)
+    return (out,cache)
 
 # Step 26 - relu_backward (not yet solved)
 # TODO: implement
