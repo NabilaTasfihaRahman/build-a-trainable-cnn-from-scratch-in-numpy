@@ -329,8 +329,12 @@ def linear_grad_weights(x, dout):
     grad_w=np.matmul(np.transpose(x),dout)
     return grad_w
 
-# Step 32 - linear_grad_bias (not yet solved)
-# TODO: implement
+# Step 32 - linear_grad_bias
+import numpy as np
+
+def linear_grad_bias(dout):
+    # TODO: Compute the bias gradient of a linear layer given upstream gradient dout.
+    return np.sum(dout,axis=0)
 
 # Step 33 - linear_backward (not yet solved)
 # TODO: implement
