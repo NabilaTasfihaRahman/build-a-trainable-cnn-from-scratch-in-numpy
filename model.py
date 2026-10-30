@@ -340,7 +340,8 @@ def linear_grad_bias(dout):
 def linear_backward(dout, cache):
     # TODO: combine input, weight, and bias gradients for a linear layer using the cache
     dx=linear_grad_input(dout,cache)
-    dw=linear_grad_weights(dout,cache)
+    x=cache['x']
+    dw=linear_grad_weights(x,dout)
     db=linear_grad_bias(dout)
     return (dx,dw,db)
 
