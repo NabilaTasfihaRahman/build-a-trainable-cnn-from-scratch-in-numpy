@@ -309,8 +309,15 @@ def linear_forward(x, weights, bias):
     'weights':weights}
     return np.matmul(x,weights)+bias ,cache
 
-# Step 30 - linear_grad_input (not yet solved)
-# TODO: implement
+# Step 30 - linear_grad_input
+import numpy as np
+
+def linear_grad_input(d_out, cache):
+    """Gradient of a linear layer w.r.t. its input X."""
+    # TODO: return dL/dX given d_out (N, D_out) and cache['weights'] (D_in, D_out)
+    weights=cache['weights']
+    grad_input=np.matmul(d_out,np.transpose(weights))
+    return grad_input
 
 # Step 31 - linear_grad_weights (not yet solved)
 # TODO: implement
