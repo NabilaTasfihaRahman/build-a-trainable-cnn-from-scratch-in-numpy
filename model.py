@@ -369,8 +369,15 @@ def linear_backward(dout, cache):
 # Step 41 - adam_step (not yet solved)
 # TODO: implement
 
-# Step 42 - init_conv_layer (not yet solved)
-# TODO: implement
+# Step 42 - init_conv_layer
+def init_conv_layer(out_channels, in_channels, kernel_size, seed=0):
+    # TODO: Build He-initialized weights and a zero bias for a single conv layer.
+    shape=(out_channels,in_channels,kernel_size,kernel_size)
+    w=he_init(shape,in_channels*kernel_size*kernel_size,seed)
+    b=init_zero_bias(out_channels)
+    dictionary={'W':w,
+    'b':b}
+    return dictionary
 
 # Step 43 - init_linear_layer (not yet solved)
 # TODO: implement
