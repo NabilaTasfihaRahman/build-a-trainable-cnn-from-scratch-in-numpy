@@ -262,18 +262,20 @@ def conv2d_backward(d_out, cache):
 import numpy as np
 def maxpool2d_forward(x, kernel, stride):
     # TODO: run 2D max pooling and cache the in-window argmax of each output cell.
-    outputsize=output_spatial_size(x,kernel,stride,0)
     N,C,h,w=x.shape
+    outputsize=output_spatial_size(h,kernel,stride,0)
+    
     row_start=0
     col_start=0
     row_end=kernel
     col_end=kernel
     out=np.zeros((N,C,outputsize,outputsize))
-    argmax=np.zeros_like(out)
+    argmax=np.zeros_like(out,dtype=int)
     for i in range(outputsize):
         for j in range(outputsize):
             out[:,:,i,j]=np.max(x[:,:,row_start:row_end,col_start:col_end],axis=(2,3))
-            reshape_x=np.reshape(x,(N,C,kernel*kernel))
+            window=x[:,:,row_start:row_end,col_start:col_end]
+            reshape_x=window.reshape(N,C,kernel*kernel)
             argmax[:,:,i,j]=np.argmax(reshape_x,2)
             col_start+=stride
             col_end+=stride
