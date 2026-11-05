@@ -82,7 +82,7 @@ def cross_entropy_loss(probs, labels, eps=1e-12):
     # TODO: return the mean negative log-likelihood of the true-class probabilities
     true_prob=gather_true_class_probs(probs,labels)
     true_prob=true_prob+eps
-    return np.mean(-np.log(true_prob))
+    return np.mean(-np.log(true_prob))+0.0
 
 # Step 9 - accuracy
 import numpy as np
