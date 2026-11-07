@@ -474,8 +474,17 @@ def init_lenet(in_channels, num_classes, seed=0):
 # Step 45 - forward_conv_block (not yet solved)
 # TODO: implement
 
-# Step 46 - forward_classifier_block (not yet solved)
-# TODO: implement
+# Step 46 - forward_classifier_block
+def forward_classifier_block(x, fc1, fc2):
+    # TODO: run flatten -> linear -> relu -> linear and return logits plus a cache dict.
+    flatten,flatten_cache=flatten_forward(x)
+    fc1,fc1_cache=linear_forward(flatten,fc1['W'],fc1['b'])
+    relu,relu_cache=relu_forward(fc1)
+    logits,fc2_cache=linear_forward(relu,fc2['W'],fc2['b'])
+    return logits,{'flatten_cache':flatten_cache,
+    'fc1_cache':fc1_cache,
+    'relu_cache':relu_cache,
+    'fc2_cache':fc2_cache}
 
 # Step 47 - lenet_forward (not yet solved)
 # TODO: implement
