@@ -538,8 +538,21 @@ def backward_conv_block(dout, cache):
     drelu=relu_backward(dp,relu_cache)
     return conv2d_backward(drelu,conv_cache)
 
-# Step 49 - backward_classifier_block (not yet solved)
-# TODO: implement
+# Step 49 - backward_classifier_block
+def backward_classifier_block(dlogits, cache):
+    # TODO: backprop through fc2 -> relu -> fc1 -> flatten using the cached values
+    fc1_cache=cache['fc1_cache']
+    fc2_cache=cache['fc2_cache']
+    
+    flatten_cache=cache['flatten_cache']
+    relu_cache=cache['relu_cache']
+    out=linear_backward(dlogits,fc2_cache)
+    relu=relu_backward(out,relu_cache)
+    fc1=linear_backward(relu,fc1_cache)
+    flatten=flatten_backward(fc1,flatten_cache)
+    return {'fc2':out,
+    'fc1':fc1,
+    'dx':flatten}
 
 # Step 50 - lenet_backward (not yet solved)
 # TODO: implement
