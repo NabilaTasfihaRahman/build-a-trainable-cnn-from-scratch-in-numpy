@@ -471,8 +471,16 @@ def init_lenet(in_channels, num_classes, seed=0):
     'fc1':{'W':fc1['W'],'b':fc1['b']},
     'fc2':{'W':fc2['W'],'b':fc2['b']}}
 
-# Step 45 - forward_conv_block (not yet solved)
-# TODO: implement
+# Step 45 - forward_conv_block
+def forward_conv_block(x, W, b, pool_size, stride, pad):
+    # TODO: run conv2d -> relu -> maxpool2d and return (out, cache_dict)
+   conv,conv_cache=conv2d_forward(x,W,b,stride,pad)
+   relu,relu_cache=relu_forward(conv)
+   out,pool_cache=maxpool2d_forward(relu,pool_size,pool_size)
+   cache={'conv_cache':conv_cache,
+   'relu_cache':relu_cache,
+   'pool_cache':pool_cache}
+   return out,cache
 
 # Step 46 - forward_classifier_block
 def forward_classifier_block(x, fc1, fc2):
