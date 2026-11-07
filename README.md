@@ -33,7 +33,7 @@ python scaffold.py
 - [x] **21.** conv2d_backward
 - [x] **22.** maxpool2d_forward
 - [x] **23.** scatter_grad_window
-- [ ] **24.** maxpool2d_backward
+- [x] **24.** maxpool2d_backward
 - [x] **25.** relu_forward
 - [x] **26.** relu_backward
 - [x] **27.** flatten_forward
@@ -57,7 +57,7 @@ python scaffold.py
 - [x] **45.** forward_conv_block
 - [x] **46.** forward_classifier_block
 - [x] **47.** lenet_forward
-- [ ] **48.** backward_conv_block
+- [x] **48.** backward_conv_block
 - [ ] **49.** backward_classifier_block
 - [ ] **50.** lenet_backward
 - [ ] **51.** lenet_predict
