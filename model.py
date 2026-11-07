@@ -401,7 +401,8 @@ import numpy as np
 
 def sgd_step(param, grad, lr):
     # TODO: return the SGD-updated parameter array (param - lr * grad).
-    return param-lr*grad
+    newparam=param-lr*grad
+    return newparam
 
 # Step 37 - adam_update_m (not yet solved)
 # TODO: implement
