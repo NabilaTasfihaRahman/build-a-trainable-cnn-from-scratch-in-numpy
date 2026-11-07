@@ -544,8 +544,11 @@ def backward_conv_block(dout, cache):
 # Step 50 - lenet_backward (not yet solved)
 # TODO: implement
 
-# Step 51 - lenet_predict (not yet solved)
-# TODO: implement
+# Step 51 - lenet_predict
+def lenet_predict(x, params):
+    # TODO: Return the argmax class index per sample from a LeNet forward pass.
+    output,_=lenet_forward(x,params)
+    return argmax_rows(output)
 
 # Step 52 - build_synthetic_image_dataset (not yet solved)
 # TODO: implement
