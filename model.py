@@ -562,13 +562,14 @@ def lenet_backward(dlogits, caches):
     block2=caches['block2']
     block1=caches['block1']
     
-    back_classifier=backward_classifier_block(dlogits,caches)
-    back_conv2,dW2,db2=backward_conv_block(back_classifier,caches)
-    back_conv1,dW1,db1=backward_conv_block(back_conv2,caches)
-    return {'fc2':{'dW':dWfc2,'db':dbfc2},
-    'fc1':{'dW':dWfc1,'db':dbfc1},
-    'conv1':{'dW':dw1,'db':db1},
-    'conv2':{'dW':dw2,'db':db2}
+    back_classifier=backward_classifier_block(dlogits,classifier)
+    back_conv2=backward_conv_block(back_classifier['dx'],block2)
+    back_conv1=backward_conv_block(back_conv2[0],block1)
+    return {
+    'conv1':{'dW':back_conv1[1],'db':back_conv1[2]},
+    'conv2':{'dW':back_conv2[1],'db':back_conv2[2]},
+    'fc1':{'dW':back_classifier['fc1']['dW'],'db':back_classifier['fc1']['db']},
+    'fc2':{'dW':back_classifier['fc2']['dW'],'db':back_classifier['fc2']['db']}
 
     }
 
