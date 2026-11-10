@@ -622,8 +622,28 @@ def iterate_minibatches(x, y, batch_size, seed=0):
         batch_idx=idx[i*batch_size:(i+1)*batch_size]
         yield x[batch_idx],y[batch_idx]
 
-# Step 56 - train_step (not yet solved)
-# TODO: implement
+# Step 56 - train_step
+import copy
+def train_step(params, opt_state, xb, yb, lr, beta_one, beta_two, eps, step):
+    # TODO: Run forward + loss + backward and apply one Adam update to every parameter.
+    logits,forward_cache=lenet_forward(xb,params)
+    loss=softmax_cross_entropy_forward(logits,yb)
+    gradient=softmax_cross_entropy_backward(logits,yb)
+    
+    back=lenet_backward(gradient,forward_cache)
+    new_opt_state=copy.deepcopy(opt_state)
+    new_param=copy.deepcopy(params)
+    new_param['conv1']['W'],new_opt_state['conv1']['W']['m'],new_opt_state['conv1']['W']['v']=adam_step(params['conv1']['W'], back['conv1']['dW'], opt_state['conv1']['W']['m'], opt_state['conv1']['W']['v'], step, lr, beta_one, beta_two, eps)
+    new_param['conv1']['b'],new_opt_state['conv1']['b']['m'],new_opt_state['conv1']['b']['v']=adam_step(params['conv1']['b'], back['conv1']['db'], opt_state['conv1']['b']['m'], opt_state['conv1']['b']['v'], step, lr, beta_one, beta_two, eps)
+    new_param['conv2']['W'],new_opt_state['conv2']['W']['m'],new_opt_state['conv2']['W']['v']=adam_step(params['conv2']['W'], back['conv2']['dW'], opt_state['conv2']['W']['m'], opt_state['conv2']['W']['v'], step, lr, beta_one, beta_two, eps)
+    new_param['conv2']['b'],new_opt_state['conv2']['b']['m'],new_opt_state['conv2']['b']['v']=adam_step(params['conv2']['b'], back['conv2']['db'], opt_state['conv2']['b']['m'], opt_state['conv2']['b']['v'], step, lr, beta_one, beta_two, eps)
+    
+    new_param['fc1']['W'],new_opt_state['fc1']['W']['m'],new_opt_state['fc1']['W']['v']=adam_step(params['fc1']['W'], back['fc1']['dW'], opt_state['fc1']['W']['m'], opt_state['fc1']['W']['v'], step, lr, beta_one, beta_two, eps)
+    new_param['fc1']['b'],new_opt_state['fc1']['b']['m'],new_opt_state['fc1']['b']['v']=adam_step(params['fc1']['b'], back['fc1']['db'], opt_state['fc1']['b']['m'], opt_state['fc1']['b']['v'], step, lr, beta_one, beta_two, eps)
+    new_param['fc2']['W'],new_opt_state['fc2']['W']['m'],new_opt_state['fc2']['W']['v']=adam_step(params['fc2']['W'], back['fc2']['dW'], opt_state['fc2']['W']['m'], opt_state['fc2']['W']['v'], step, lr, beta_one, beta_two, eps)
+    new_param['fc2']['b'],new_opt_state['fc2']['b']['m'],new_opt_state['fc2']['b']['v']=adam_step(params['fc2']['b'], back['fc2']['db'], opt_state['fc2']['b']['m'], opt_state['fc2']['b']['v'], step, lr, beta_one, beta_two, eps)
+    
+    return (new_param,new_opt_state,loss)
 
 # Step 57 - train_one_epoch (not yet solved)
 # TODO: implement
