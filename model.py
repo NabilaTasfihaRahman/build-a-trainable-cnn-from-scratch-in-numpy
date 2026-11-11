@@ -688,6 +688,9 @@ def train_loop(params, x_train, y_train, num_epochs, batch_size, lr=1e-3, beta_o
         opt_state=new_opt_state
     return new_param,Loss
 
-# Step 59 - evaluate (not yet solved)
-# TODO: implement
+# Step 59 - evaluate
+import numpy as np
+def evaluate(params, x, y):
+    # TODO: return the fraction of samples whose predicted class equals the label.
+    return np.mean(lenet_predict(x,params)==y)
 
