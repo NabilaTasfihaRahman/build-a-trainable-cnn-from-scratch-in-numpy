@@ -661,8 +661,32 @@ def train_one_epoch(params, opt_state, x, y, batch_size, lr, beta_one, beta_two,
         Loss.append(loss)
     return new_param,new_opt_state,step_counter,Loss
 
-# Step 58 - train_loop (not yet solved)
-# TODO: implement
+# Step 58 - train_loop
+from itertools import chain
+from copy import deepcopy
+import numpy as np
+def train_loop(params, x_train, y_train, num_epochs, batch_size, lr=1e-3, beta_one=0.9, beta_two=0.999, eps=1e-8, seed=0):
+    # TODO: initialize Adam state, loop epochs calling train_one_epoch, return (params, loss_history).
+    np.random.seed(seed)
+    opt_state = {}
+    new_param=deepcopy(params)
+    for layer in params:
+        opt_state[layer] = {}
+
+        for pname in params[layer]:
+            param = params[layer][pname]
+            opt_state[layer][pname] = {
+                "m": np.zeros_like(param),
+                "v": np.zeros_like(param),
+            }
+    Loss=[]
+    step_counter=0
+    for i in range(num_epochs):
+        new_param,new_opt_state,step_counter,loss=train_one_epoch(params, opt_state, x, y, batch_size, lr, beta_one, beta_two, eps, step_counter, seed=0) 
+        Loss.extend(loss)
+        params=new_param
+        opt_state=new_opt_state
+    return new_param,Loss
 
 # Step 59 - evaluate (not yet solved)
 # TODO: implement
